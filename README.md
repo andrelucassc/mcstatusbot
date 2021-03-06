@@ -1,53 +1,24 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Huskydog9988/mcstatusbot/tree/V0.2)
+
 # mcstatusbot
-discrod bot for server status<br/>
+A simple [Discord.js](https://www.npmjs.com/package/discord.js) bot that pings [Minecraft](https://minecraft.gamepedia.com) servers using the [mc-ping-updated](https://www.npmjs.com/package/mc-ping-updated) node module.
 
-# Self Host
-Info for slef hosting can be found here -> https://github.com/lerokko/mcstatusbot<br/>
+This bot is currently compatible with post-1.8 vanilla, Spigot, Waterfall, and Bungeecord servers. Other types of servers are partially supported with varying degrees of comaptbility.
 
-# Setup for Heroku
+# Setup & Configuration
+- First install Node.js from [here](https://nodejs.org/en/download/) if not already installed.
+- Then open CMD in the folder in which the bot is in and run `npm i`
 
-Step 1: Sign into Github (if you already haven't already) and fork this repository<br/>
-<br/>
-Step 2: Go to https://signup.heroku.com/login to sign up for Heroku (if you don't have an account)<br/>
-<br/>
-Step 3: Now go to https://id.heroku.com/login (if you where not redirected there)  and sign in<br/>
-<br/>
-Step 4: Now that you have signed in press "New" in the upper Rigt hand corner then press "Create new app" (Should be done at https://dashboard.heroku.com/apps)<br/>
-<br/>
-Step 5: Enter in any name you wish for you app to be but make it original so it can not be guessed (Just trust me on this) also chose a server region if you so wish. ALSO, DO NOT add a "pipeline". Now press "Create app"<br/>
-<br/>
-Step 6: Now go to the deploy tab and press "GitHub" like shown in -> https://imgur.com/gallery/QR30Fk4 and follow the directions<br/>
-<br/>
-Step 7: When done in text box that says "repo-name" type in "mcstatusbot" (or what you renamed the repo you forked earlier) then press search adn press "connect" next to the correct repo that the bot is in like in -> https://imgur.com/gallery/vir5jUw<br/>
-<br/>
-Step 8: Scroll down the page to "Automatic deploys" and under chose branch, chose the branch "heroku" like in -> 
-https://imgur.com/a/KREzcrr then press "Enable Automatic Deploys"<br/>
-<br/>
-Step 9: Now scroll to the top and go to the settings tab, and in there press "Reveal Config Vars"<br/>
-<br/>
-Step 10: Make your Config Vars look like mine in -> https://imgur.com/a/LRkEW4o but replace "YOUR IP HERE" with your servers ip, then replace "YOUR PORT HERE" with the port of your server<br/>
-<br/>
-Step 11: Open a new tab and head over to the discord applicatons page (here https://discordapp.com/developers/applications/)<br/>
-<br/>
-Step 12: Click “new application”. Give it a name, picture and description<br/>
-<br/>
-Step 13: Press Bot on the left hand side of the screen then press “Add bot” and click “Yes, Do It!” when the dialog pops up<br/>
-<br/>
-Step 14: Copy down the bot token This is what is used to login to your bot later<br/>
-<br/>
-Step 15: Go back to the Heroku Dashboard for your bot and go to the settings tab, then go to the Config Vars again<br/>
-<br/>
-Step 16: Press the pencil on the line with the "key" "token" like in -> https://imgur.com/a/bmSMJTb<br/>
-<br/>
-Step 17: Replace "YOUR BOT TOKEN HERE" with your bot token you copied down earier like in -> https://imgur.com/a/7G3R1lP (Inactive Token BTW) then press save changes<br/>
-<br/>
-Step 18: Go to the overview tab, and under "Dyno formation" press "Configure Dynos". Under "Free Dynos" press the pencil for editing "web" press the button so it turns blue, then press confirm like in -> https://imgur.com/a/38Hqle8<br/>
-<br/>
-Step 19: Press the pencil for editing "worker" press the button so it turns blue, then press confirm like in -> https://imgur.com/a/jt1AJkb<br/>
-<br/>
-# Inviting your bot
-Use the link https://discordapp.com/developers/applications/ and select the app you made for the bot then press "Copy" under "Client ID" and paste it into the "Client ID" feild on the website -> https://discordapi.com/permissions.html like in -> https://imgur.com/a/PXU3y03
+Edit the `config.json` file to provide your bot token, preferred command prefix, Minecraft server IP address & port, and ping interval:
+- Replace `"YOUR BOT TOKEN HERE"` with your bot token.
+- Replace `"/"` with your preferred command prefix. Defaults to `/`.
+- Replace `"YOUR SERVER IP HERE"` with the IP address of the Minecraft server you want to poll. Domains that redirect to IP addresses ("play.exampleserver.net") will also work.
+- Replace `"25565"` with the port number of the Minecraft server you want to poll. Defaults to port 25565.
+- Replace `"30"` with the frequency, in seconds, at which you want the bot to ping the server. Defaults to pinging every 30 seconds.
+- Replace `"7289DA"` with the hex color code you prefer the bot's richEmbed messages to use.
+- Start the bot by running `start.sh` (Linux) or `start.bat` (Windows). The bot should connect and begin polling the server.
 
-# Running your bot
-
-Under the deploy tab scroll to the bottom and make sure "Manual Deploy" looks like this -> https://imgur.com/a/rVrRw3z. If so, then press "Deploy Branch"
+# Default Commands
+- `/help` (aliases: `/commands`, `/list`, `/bot`) - List the other commands
+- `/status` (aliases: `/server`, `/online`) - Manually poll the Minecraft server whose IP address and port are listed in `config.json`, returning the server's version and a list of any online players
+- `/crash` - Stop the bot. If you're using a looping `start.sh` script like the one provided, this effectively restarts the bot.
